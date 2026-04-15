@@ -1,0 +1,3 @@
+/home/pi/projects/embtest/build/CMakeFiles/firmware.elf.dir
+/home/pi/projects/embtest/build/CMakeFiles/edit_cache.dir
+/home/pi/projects/embtest/build/CMakeFiles/rebuild_cache.dir

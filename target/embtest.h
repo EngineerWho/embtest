@@ -13,6 +13,7 @@ typedef struct {
     embtest_fn_t  fn;
 } embtest_entry_t;
 
+void board_init(void);
 /* ── internal state (defined in runner.c) ───────────── */
 
 #define EMBTEST_MAX_TESTS 64
@@ -28,18 +29,17 @@ void embtest_assert_fail(const char *file, int line, const char *msg);
 
 /* ── TEST() macro ───────────────────────────────────── */
 
-#define TEST(name)                                                  \
-    static void test_##name(void);                                  \
+#define TEST(test_name)                                             \
+    static void test_##test_name(void);                             \
     __attribute__((constructor))                                    \
-    static void embtest_reg_##name(void) {                          \
+    static void embtest_reg_##test_name(void) {                     \
         if (embtest_count < EMBTEST_MAX_TESTS) {                    \
-            embtest_registry[embtest_count].name = #name;           \
-            embtest_registry[embtest_count].fn   = test_##name;     \
-            embtest_count++;                                         \
+            embtest_registry[embtest_count].name = #test_name;      \
+            embtest_registry[embtest_count].fn   = test_##test_name;\
+            embtest_count++;                                        \
         }                                                           \
     }                                                               \
-    static void test_##name(void)
-
+    static void test_##test_name(void)
 /* ── ASSERT macros ──────────────────────────────────── */
 
 #define ASSERT_TRUE(expr)                                           \
