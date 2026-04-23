@@ -1,0 +1,29 @@
+# Build output
+build/
+*.elf
+*.bin
+*.hex
+*.map
+*.o
+*.a
+
+# CMSIS and ST vendor files (large — downloaded by user)
+boards/stm32f4/CMSIS/
+boards/stm32f4/stm32f4xx.h
+boards/stm32f4/stm32f411xe.h
+boards/stm32f4/system_stm32f4xx.h
+boards/stm32f4/startup_stm32f411xx.s
+boards/stm32f4/STM32F446RETx_FLASH.ld
+boards/stm32f4/STM32F411RETX_FLASH.ld
+
+# Actions runner (never push this)
+actions-runner/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Editor
+.vscode/
+*.swp

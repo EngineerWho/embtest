@@ -1,0 +1,44 @@
+name: Embedded Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Run tests on STM32F411RE
+    runs-on: [ self-hosted, stm32, embedded ]
+    timeout-minutes: 10
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download vendor files
+        run: ./scripts/setup.sh
+
+      - name: Install Python dependencies
+        run: pip3 install pyserial --quiet
+
+      - name: Build firmware
+        run: ./scripts/build.sh
+
+      - name: Flash and run tests
+        run: |
+          python3 -m host.cli \
+            --port /dev/ttyACM0 \
+            --elf build/firmware.elf \
+            --cfg boards/stm32f4/flash.cfg \
+            --output junit-results.xml \
+            --timeout 60
+
+      - name: Publish test results
+        uses: mikepenz/action-junit-report@v4
+        if: always()
+        with:
+          report_paths: junit-results.xml
+          check_name: STM32 Test Results
+          fail_on_failure: true

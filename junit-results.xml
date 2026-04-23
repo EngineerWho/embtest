@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="suite" tests="8" failures="2" errors="0">
+  <testcase name="always_passes" classname="suite" time="4.2e-05" />
+  <testcase name="basic_math" classname="suite" time="4.2e-05" />
+  <testcase name="always_fails" classname="suite" time="0.0">
+    <failure message="1 != 2" type="AssertionError">/home/pi/projects/embtest/examples/test_blink/test_blink.c:16: 1 != 2</failure>
+  </testcase>
+  <testcase name="string_not_null" classname="suite" time="5.7e-05" />
+  <testcase name="causes_timeout" classname="suite" time="0.0">
+    <error message="test timed out" type="Timeout" />
+  </testcase>
+  <testcase name="runs_after_timeout" classname="suite" time="4.2e-05" />
+  <testcase name="causes_hardfault" classname="suite" time="5.1e-05" />
+  <testcase name="runs_after_fault" classname="suite" time="4.2e-05" />
+</testsuite>
