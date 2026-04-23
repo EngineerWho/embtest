@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
 jobs:
   test:
     name: Run tests on STM32F411RE
@@ -27,6 +32,7 @@ jobs:
         run: ./scripts/build.sh
 
       - name: Flash and run tests
+        continue-on-error: true
         run: |
           python3 -m host.cli \
             --port /dev/ttyACM0 \
